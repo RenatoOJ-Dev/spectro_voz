@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E9F9FF"
+    android:padding="24dp">
+
+    <!-- Ícone central: rosto neutro -->
+    <ImageView
+        android:id="@+id/ivEmotionIcon"
+        android:layout_width="271dp"
+        android:layout_height="261dp"
+        android:layout_marginTop="80dp"
+        android:contentDescription="@string/emotion_icon_description"
+        android:src="@drawable/rosto_neutro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Botão de gravação -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRecord"
+        android:layout_width="117dp"
+        android:layout_height="112dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#FF0000"
+        android:contentDescription="@string/record_button_description"
+        app:cornerRadius="40dp"
+        app:icon="@drawable/ic_microfone_branco"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivEmotionIcon" />
+
+    <!-- Texto de orientação -->
+    <TextView
+        android:id="@+id/tvInstruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/touch_and_speak_instruction"
+        android:textSize="16sp"
+        android:textColor="#666666"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/btnRecord"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+    <!-- ✅ Botão "Ver Histórico" (NOVO) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnViewHistoryFromMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver Histórico"
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#4A90E2"
+        app:layout_constraintTop_toBottomOf="@id/tvInstruction"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

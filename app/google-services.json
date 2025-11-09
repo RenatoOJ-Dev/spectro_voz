@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "74787627161",
+    "project_id": "spectrovoz",
+    "storage_bucket": "spectrovoz.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74787627161:android:4a56037f692d96ca841808",
+        "android_client_info": {
+          "package_name": "br.edu.spectrovoz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdJibUYIQD56M6EJSgMY4fTVZRUqvLrdo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
