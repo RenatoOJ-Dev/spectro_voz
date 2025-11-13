@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- PERMISSÃO DE ÁUDIO (adicione esta linha!) -->
+    <!-- PERMISSÃO DE ÁUDIO -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
@@ -14,7 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SpectroVoz">
-
 
         <activity
             android:name=".OnboardingActivity"
@@ -28,6 +27,15 @@
         <activity android:name=".MainActivity" android:exported="false" />
         <activity android:name=".ResultActivity" />
         <activity android:name=".HistoryActivity" />
+
+        <!-- Serviço para receber notificações do Firebase -->
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
     </application>
 

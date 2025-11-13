@@ -12,7 +12,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.material.button.MaterialButton // ← IMPORT ADICIONADO
+import com.google.android.material.button.MaterialButton
+import com.google.firebase.messaging.FirebaseMessaging // ← Para notificações
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
@@ -25,14 +26,29 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnRecord = findViewById(R.id.btnRecord)
+        // 👇 Obter token FCM (necessário para notificações reais)
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val token = task.result
+                // Mostra os primeiros 20 caracteres no Toast (token completo no Logcat)
+                Toast.makeText(this, "Token: ${token.take(20)}...", Toast.LENGTH_LONG).show()
+                println("FCM Token: $token") // ← Copie este valor no Logcat
+            } else {
+                Toast.makeText(this, "Erro ao obter token", Toast.LENGTH_SHORT).show()
+                println("Erro FCM: ${task.exception}")
+            }
+        }
 
-        // 👇 Agora com MaterialButton
+        // Vincular botões
+        btnRecord = findViewById(R.id.btnRecord)
         val btnViewHistoryFromMain = findViewById<MaterialButton>(R.id.btnViewHistoryFromMain)
+
+        // Configurar clique do botão de histórico
         btnViewHistoryFromMain.setOnClickListener {
             startActivity(Intent(this, HistoryActivity::class.java))
         }
 
+        // Verificar permissão de áudio
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
             != PackageManager.PERMISSION_GRANTED
         ) {
@@ -58,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                 btnRecord.isEnabled = true
                 setupClick()
             } else {
-                Toast.makeText(this, "Permissão necessária.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Permissão necessária para usar o app.", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -83,12 +99,12 @@ class MainActivity : AppCompatActivity() {
             mediaRecorder.prepare()
             mediaRecorder.start()
 
+            // Gravar por 5 segundos e ir para o resultado
             Handler(Looper.getMainLooper()).postDelayed({
                 mediaRecorder.stop()
                 mediaRecorder.release()
 
-                val intent = Intent(this, ResultActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, ResultActivity::class.java))
             }, 5000)
 
         } catch (e: IOException) {
